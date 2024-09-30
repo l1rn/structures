@@ -1,0 +1,76 @@
+#include <iostream>
+#include <string>
+using namespace std;
+int main() {
+	// setlocale(LC_CTYPE, "Russian");
+	system("chcp 1251");
+	const int N = 2;
+	double maxs;
+	int i;
+	struct student
+	{
+		string fam;
+		int kurs;
+		string grup;
+		double stip;
+	};
+	student stud[N];
+	for (int i = 0; i < N; i++) {
+		cout << i+1 << "-ый Студент\n";
+		cout << "Фамилия: "; 
+		cin >> stud[i].fam;
+		cout << stud[i].fam;
+		cout << endl;
+		cout << "Курс: ";
+		cin >> stud[i].kurs;
+		cout << endl;
+		cout << "Группа:";
+		cin >> stud[i].grup;
+		cout << endl;
+		cout << "Стипендия:";
+		cin >> stud[i].stip;
+		cout << endl;
+	}
+	maxs = 0;
+	for (int i = 0; i < N; i++) {
+		if (stud[i].stip > maxs) {
+			maxs = stud[i].stip;
+		}
+	}
+	
+	cout << "\nСтудент с максимальной стипендией - " << maxs << " рублей" << '\n';
+	int index = -1; // -1 потому что не найдено
+	// В цикле программа ищет первого студента с нулевой стипендией, сохраняет его индекс и прерывает цикл
+	for (int i = 0; i < N; i++) {
+		if (stud[i].stip == 0) {
+			index = i;
+			break;
+		}
+	}
+	int indexForStudent = -1;
+	for (int i = 0; i < N; i++) {
+		if (stud[i].stip == maxs) {
+			index = i;
+			break;
+		}
+	}
+	if (indexForStudent != -1) {
+		cout << "Студент - " << stud[indexForStudent].grup << endl;
+	}
+	else {
+		cout << "Студентов со стипендией нету. " << endl;
+	}
+
+	
+
+	if (index != -1) {	
+		cout << "Группа, которая не получает стипендию - " << stud[index].grup;
+	}
+	else {
+		cout << "Все студенты получают стипендию." << endl;
+	}
+
+	return 0;
+}
+
+
