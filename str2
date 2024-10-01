@@ -1,0 +1,93 @@
+#include <iostream>
+#include <string>
+using namespace std;
+int main() {
+	// setlocale(LC_CTYPE, "Russian");
+	system("chcp 1251");
+	const int N = 3;
+	double maxs;
+	int i;
+	struct student
+	{
+		string fam;
+		int kurs;
+		string grup;
+		double stip;
+	};
+	student stud[N];
+	for (int i = 0; i < N; i++) {
+		cout << i+1 << "-ый Студент\n";
+		cout << "Фамилия: "; 
+		cin >> stud[i].fam;
+		cout << stud[i].fam;
+		cout << endl;
+		cout << "Курс: ";
+		cin >> stud[i].kurs;
+		cout << endl;
+		cout << "Группа:";
+		cin >> stud[i].grup;
+		cout << endl;
+		cout << "Стипендия:";
+		cin >> stud[i].stip;
+		cout << endl;
+	}
+	maxs = 0;
+	for (int i = 0; i < N; i++) {
+		if (stud[i].stip > maxs) {
+			maxs = stud[i].stip;
+		}
+	}
+	
+	cout << "\nСтудент с максимальной стипендией - " << maxs << " рублей" << '\n';
+
+
+	
+
+	cout << "Студент/ы, с максимальной стипендией:" << endl;
+	for (int i = 0; i < N; i++) {
+		if (stud[i].stip == maxs && maxs != 0) {
+			cout << " - " << stud[i].fam << endl;
+		}
+		else if(stud[i].stip == 0 && stud[i].stip == maxs) {
+			cout << " - Студентов со стипендией нету. " << endl;
+			break;
+		}
+	}
+
+
+	// для проверки на то, получает ли он степуху или нет
+
+	bool foundNoStipend = false;
+	string printedGroups[N];  
+	int printedCount = 0;     
+
+	cout << "Группы, которые не получают стипендию:" << endl;
+	for (int i = 0; i < N; i++) {
+		if (stud[i].stip == 0) {
+			bool alreadyPrinted = false;
+
+			// проверяем, была ли эта группа уже выведена
+			for (int j = 0; j < printedCount; j++) {
+				if (printedGroups[j] == stud[i].grup) {
+					alreadyPrinted = true;
+					break;
+				}
+			}
+
+			// усли группа ещё не была выведена, выводим её
+			if (!alreadyPrinted) {
+				cout << " - " << stud[i].grup << endl;
+				printedGroups[printedCount] = stud[i].grup; 
+				printedCount++;
+				foundNoStipend = true;
+			}
+		}
+	}
+
+	if (!foundNoStipend) {
+		cout << "Все студенты получают стипендию." << endl;
+	}
+
+}
+
+
